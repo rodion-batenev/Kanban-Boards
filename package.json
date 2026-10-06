@@ -1,0 +1,120 @@
+{
+  "name": "kanban-boards",
+  "displayName": "Kanban Boards",
+  "description": "Minimal kanban board editor for *.knbn files that follows your theme.",
+  "version": "0.1.0",
+  "publisher": "tasty-lobster",
+  "author": "Tasty Lobster",
+  "license": "MIT",
+  "homepage": "https://github.com/rodion-batenev/Kanban-Boards",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rodion-batenev/Kanban-Boards.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rodion-batenev/Kanban-Boards/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "languages": [
+      {
+        "id": "json",
+        "extensions": [
+          ".knbn"
+        ]
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "kanban.board",
+        "displayName": "Kanban Board",
+        "selector": [
+          {
+            "filenamePattern": "*.knbn"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "kanban.newBoard",
+        "title": "New Board",
+        "category": "Kanban",
+        "icon": "$(project)"
+      },
+      {
+        "command": "kanban.openAsText",
+        "title": "Open as Text",
+        "category": "Kanban",
+        "icon": "$(go-to-file)"
+      },
+      {
+        "command": "kanban.openAsBoard",
+        "title": "Open as Board",
+        "category": "Kanban",
+        "icon": "$(project)"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "kanban.openAsText",
+          "when": "activeCustomEditorId == kanban.board",
+          "group": "navigation"
+        },
+        {
+          "command": "kanban.openAsBoard",
+          "when": "resourceExtname == .knbn && activeEditor == workbench.editors.files.textFileEditor",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "kanban.newBoard",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation@10"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "kanban.openAsText",
+          "when": "activeCustomEditorId == kanban.board"
+        },
+        {
+          "command": "kanban.openAsBoard",
+          "when": "resourceExtname == .knbn"
+        }
+      ]
+    },
+    "jsonValidation": [
+      {
+        "fileMatch": "*.knbn",
+        "url": "./schema/kanban.schema.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc -p .",
+    "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test test/*.test.ts",
+    "vscode:prepublish": "npm run typecheck && node esbuild.mjs --production",
+    "package": "vsce package --no-dependencies --no-rewrite-relative-links"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "@types/vscode": "1.85.0",
+    "@vscode/codicons": "^0.0.46-24",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
+  }
+}

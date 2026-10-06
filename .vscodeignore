@@ -1,0 +1,10 @@
+**
+!dist/extension.js
+!dist/webview.js
+!dist/main.css
+!dist/codicon.ttf
+!schema/**
+!package.json
+!README.md
+!LICENSE
+!images/board.png

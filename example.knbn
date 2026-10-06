@@ -1,0 +1,61 @@
+{
+  "$schema": "./schema/kanban.schema.json",
+  "version": 1,
+  "title": "Kanban JSON",
+  "columns": [
+    {
+      "id": "c_todo",
+      "title": "Todo",
+      "cards": [
+        {
+          "id": "k_schema",
+          "title": "Check the [file format](schema/kanban.schema.json)",
+          "description": "A board is JSON: version, title, columns, cards. color is optional.",
+          "color": "blue"
+        },
+        {
+          "id": "k_links",
+          "title": "Open a link",
+          "description": "[createBoard](src/board.ts:38) jumps to a line. [README](README.md) is a relative path. Cmd/Ctrl+click opens beside. https://code.visualstudio.com/api is a bare URL.",
+          "color": "purple"
+        },
+        {
+          "id": "k_text",
+          "title": "Switch to the JSON",
+          "description": "Kanban: Open as Text in the editor title bar. Undo, redo, and git diffs work on the file.",
+          "color": "red"
+        }
+      ]
+    },
+    {
+      "id": "c_doing",
+      "title": "In Progress",
+      "cards": [
+        {
+          "id": "k_drag",
+          "title": "Drag this card",
+          "description": "Reorder it here, or drop it on another column. Drag a column by its header.",
+          "color": "yellow"
+        },
+        {
+          "id": "k_edit",
+          "title": "Edit a card",
+          "description": "Click to edit. Enter saves the title, Cmd/Ctrl+Enter saves the description, Esc cancels. The link button inserts a workspace file.",
+          "color": "orange"
+        }
+      ]
+    },
+    {
+      "id": "c_done",
+      "title": "Done",
+      "cards": [
+        {
+          "id": "k_theme",
+          "title": "Follows the color theme",
+          "description": "Marks use the theme's chart colors: red, orange, yellow, green, blue, purple.",
+          "color": "green"
+        }
+      ]
+    }
+  ]
+}

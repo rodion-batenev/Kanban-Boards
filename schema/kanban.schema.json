@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Kanban board",
+  "type": "object",
+  "required": ["version", "title", "columns"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1, "description": "Format version." },
+    "title": { "type": "string", "description": "Board title." },
+    "columns": {
+      "type": "array",
+      "description": "Columns in display order.",
+      "items": { "$ref": "#/definitions/column" }
+    }
+  },
+  "definitions": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier within the board."
+    },
+    "column": {
+      "type": "object",
+      "required": ["id", "title", "cards"],
+      "properties": {
+        "id": { "$ref": "#/definitions/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "cards": {
+          "type": "array",
+          "description": "Cards in display order.",
+          "items": { "$ref": "#/definitions/card" }
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": { "$ref": "#/definitions/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "color": {
+          "enum": ["red", "orange", "yellow", "green", "blue", "purple"],
+          "description": "Color mark; follows the theme's chart palette."
+        }
+      }
+    }
+  }
+}
